@@ -1,4 +1,4 @@
-# @webship-js/angular-steps 2.0.0 and webship-js 2.0.18
+# @webship-js/angular-steps 2.0.1 and webship-js 2.0.18
 ^"([^"]*)" should be (visible|hidden|attached|focused|enabled|disabled|editable)(?: within (\d+) seconds?)?$
 ^"([^"]*)" should be in the viewport(?: within (\d+) seconds?)?$
 ^"([^"]*)" should contain text "([^"]*)"(?: within (\d+) seconds?)?$

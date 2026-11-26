@@ -81,7 +81,7 @@ test('the testing hook adds the step pack and, for the demo template, a first fe
   const r = hook(p);
   assert.strictEqual(r.status, 0, r.stderr + r.stdout);
   const pkg = JSON.parse(fs.readFileSync(path.join(p.dir, 'package.json'), 'utf8'));
-  assert.strictEqual(pkg.devDependencies['@webship-js/angular-steps'], '^2.0.0');
+  assert.strictEqual(pkg.devDependencies['@webship-js/angular-steps'], '^2.0.1');
   assert.strictEqual(pkg.devDependencies['webship-js'], '^2.0.18', 'what was there stays');
   const cucumber = fs.readFileSync(path.join(p.dir, 'cucumber.js'), 'utf8');
   const lines = cucumber.split('\n');
@@ -232,7 +232,7 @@ test('a new app: the official starter with server rendering and the demo pages o
   assert.ok(fs.readFileSync(path.join(b.project, '.ddev', 'config.angular.yaml'), 'utf8').includes(SERVE), 'the daemon runs the serve script');
   assert.match(b.calls, /^ddev start -y$/m);
   assert.match(b.calls, /^ddev exec -d \/var\/www\/html CI=true NG_CLI_ANALYTICS=false npx --yes @angular\/cli@22\.3\.0 new demo --directory app --ssr --defaults --interactive=false --ai-config=none --skip-git --skip-install --package-manager=npm --style=css$/m);
-  assert.match(b.calls, /^ddev exec -d \/var\/www\/html rm -rf \/tmp\/angular-demo && mkdir -p \/tmp\/angular-demo && cd \/tmp\/angular-demo && npm pack --silent @webship-js\/angular-steps@2\.0\.0 > \/dev\/null && tar -xzf \.\/\*\.tgz && test -d package\/demo && cp -a package\/demo\/\. \/var\/www\/html\/app\/ && rm -rf \/tmp\/angular-demo$/m);
+  assert.match(b.calls, /^ddev exec -d \/var\/www\/html rm -rf \/tmp\/angular-demo && mkdir -p \/tmp\/angular-demo && cd \/tmp\/angular-demo && npm pack --silent @webship-js\/angular-steps@2\.0\.1 > \/dev\/null && tar -xzf \.\/\*\.tgz && test -d package\/demo && cp -a package\/demo\/\. \/var\/www\/html\/app\/ && rm -rf \/tmp\/angular-demo$/m);
   assert.match(b.calls, /^ddev exec -d \/var\/www\/html\/app npm install --no-audit --no-fund$/m);
   assert.match(b.calls, /^ddev exec -d \/var\/www\/html\/app npm run build$/m);
   const order = ['ddev start', '@angular/cli@22.3.0 new', 'npm pack', 'npm install', 'npm run build'].map((s) => b.calls.indexOf(s));
@@ -242,7 +242,7 @@ test('a new app: the official starter with server rendering and the demo pages o
   assert.match(b.r.stdout, /The app has server rendering: its own server \(dist\/demo\/server\/server\.mjs\) serves it, answering app1\.ddev\.site,127\.0\.0\.1,localhost\./);
   assert.match(b.calls, /curl -sS -o \/dev\/null http:\/\/127\.0\.0\.1:3000\//, '--install waits for the app\'s server');
   assert.match(b.r.stdout, /^Go to https:\/\/app1\.ddev\.site$/m);
-  assert.match(b.r.stdout, /dev app1 is served: the Angular app in app\/ \(the official starter of the Angular CLI 22\.3\.0, with the demo pages of @webship-js\/angular-steps 2\.0\.0\)\./);
+  assert.match(b.r.stdout, /dev app1 is served: the Angular app in app\/ \(the official starter of the Angular CLI 22\.3\.0, with the demo pages of @webship-js\/angular-steps 2\.0\.1\)\./);
   assert.doesNotMatch(b.calls, /^ddev stop/m, 'with --install the app stays served');
   assert.doesNotMatch(b.calls, /git clone|@latest/, 'nothing is cloned, nothing is taken at latest');
 });
@@ -358,7 +358,7 @@ for (const [rt, url, host] of [['docker', 'http://127.0.0.1:43210', '127.0.0.1,l
     assert.ok(!fs.existsSync(path.join(b.project, '.ddev')), 'no .ddev folder: it would make the project a DDEV one');
     assert.ok(b.calls.indexOf('ddev config') < b.calls.indexOf('rt_claim angular'), 'the claim comes after the runtime\'s files are written');
     assert.match(b.calls, /@angular\/cli@22\.3\.0 new demo --directory app --ssr/, 'the app is made in the container, as on DDEV');
-    assert.match(b.calls, /npm pack --silent @webship-js\/angular-steps@2\.0\.0/, 'with the same demo pages');
+    assert.match(b.calls, /npm pack --silent @webship-js\/angular-steps@2\.0\.1/, 'with the same demo pages');
     assert.match(b.r.stdout, new RegExp(`^Go to ${url.replace(/[.:/]/g, '\\$&')}$`, 'm'));
     assert.doesNotMatch(b.r.stdout, /ddev\.site/, 'no message names a DDEV address');
   });

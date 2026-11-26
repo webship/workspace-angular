@@ -37,11 +37,11 @@
 
 # The step pack an app is tested with, and the release line it is required at.
 readonly ANGULAR_STEPS_PACKAGE='@webship-js/angular-steps';
-readonly ANGULAR_STEPS_VERSION='^2.0.0';
+readonly ANGULAR_STEPS_VERSION='^2.0.1';
 
 # The release of the step pack whose demo pages the demo template takes: pinned, so the demo the builder makes is the
 # one that pack's features were proven on.
-readonly ANGULAR_DEMO_PACK_VERSION='2.0.0';
+readonly ANGULAR_DEMO_PACK_VERSION='2.0.1';
 
 # The Angular CLI (https://github.com/angular/angular-cli), at the release the builder is proven with.
 readonly ANGULAR_CLI_VERSION='22.3.0';

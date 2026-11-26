@@ -130,7 +130,7 @@ writes the script that serves the build (`.webship-angular/serve.sh`), which the
 there. With `--install` it checks that the app answers.
 
 **The demo template** is the official starter with server rendering, with the pages of the step pack's `demo/` over
-it, taken from the pack's npm package at the release the builder pins (`@webship-js/angular-steps` 2.0.0): the demo the
+it, taken from the pack's npm package at the release the builder pins (`@webship-js/angular-steps` 2.0.1): the demo the
 builder makes is the one that release's features were proven on. It has a counter, an about page, posts from the
 demo's API, a post by a resolver (404 for a missing one), a guard that redirects to the latest post, a contact form
 that works without JavaScript and is sent in place with it, a page rendered in the browser alone, and a 404 page for an
@@ -217,10 +217,10 @@ database, so on Kubernetes it needs core 1.0.35 or newer (webship/workspace#884)
 
 | Runtime | The address of the app | Proven with this builder |
 | --- | --- | --- |
-| DDEV (the default) | `https://<name>.ddev.site` | PROOF-DDEV |
-| Docker Compose (`--runtime docker`) | `http://127.0.0.1:<port>`, a free port kept in `compose.yaml` | PROOF-DOCKER |
-| Podman (`--runtime podman`) | `http://127.0.0.1:<port>` | PROOF-PODMAN |
-| Kubernetes (`--runtime kubernetes`) | `http://<node address>:<NodePort>` | PROOF-KUBERNETES |
+| DDEV (the default) | `https://<name>.ddev.site` | The demo template built and served in 1 min 2 s (Node.js 24 in DDEV's web container: the Angular CLI, the demo pages of `@webship-js/angular-steps` from npm, the packages and the build), taken over in 157 ms; a change of view by the router, the contact form answered in place and, without JavaScript, through the server; the posts drawn on the server (its requests to its own API at its own port); `NG_ALLOWED_HOSTS` with the project's host, and another host answered 400 inside the container; the testing setup from npm (`@webship-js/angular-steps`, webship-js 2.0.18) and its first feature, 5 scenarios and 22 steps |
+| Docker Compose (`--runtime docker`) | `http://127.0.0.1:<port>`, a free port kept in `compose.yaml` | The demo template (`ci-angular`, the CI's featuresSite) built in 51 s, taken over in 315 ms, the same checks, another host answered 400; the testing setup and its first feature (5 scenarios, 22 steps), and the skill's three examples, each on its app: the demo's views (5 scenarios, 24 steps) and its contact form (3 scenarios, 20 steps), and the starter alone built with `--template minimal` in 53 s (3 scenarios, 9 steps; the 404 its server answers for an unknown address among them); an app without server rendering from its repository, the Jira clone (`--source https://github.com/trungvose/jira-clone-angular.git`: Angular 20.3, npm), built in 1 min 9 s and served by `serve -s`: a deep address loaded straight is answered with the app's single page, and the app starts there; the plugin's features on the dashboard |
+| Podman (`--runtime podman`) | `http://127.0.0.1:<port>` | The demo template built in 1 min 12 s with Node.js's own image, taken over in 538 ms, the same checks, another host answered 400; the testing setup and its first feature (5 scenarios, 22 steps); the plugin's features on the dashboard |
+| Kubernetes (`--runtime kubernetes`) | `http://<node address>:<NodePort>` | On kind (Kubernetes 1.37.0): the demo template built in 1 min 18 s, served at the node's address (the node's host among the allowed hosts), taken over in 69 ms, the same checks, another host answered 400; the testing setup on the cluster and its first feature (5 scenarios, 22 steps); the plugin's features on the dashboard, 12 scenarios with the Docker Compose, Podman and Kubernetes apps up |
 
 A project of the builder is known by DDEV's file on DDEV and by its claim on another runtime, so the testing setup,
 the Users tools (which say there are no accounts) and the dashboard's row work the same on each. Lando and Docksal are

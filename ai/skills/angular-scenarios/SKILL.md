@@ -98,7 +98,7 @@ Three features that pass, each against the app it names:
 - [`examples/contact.feature`](examples/contact.feature): the demo's contact form, accepted and refused (the same
   app).
 - [`examples/starter.feature`](examples/starter.feature): the official starter alone (`bash cmd-angular-project.sh
-  ngmin --template minimal --install`), its welcome page.
+  ngmin --template minimal --install`), its welcome page, and the 404 its server answers for any other address.
 
 ## The book
 

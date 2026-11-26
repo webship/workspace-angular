@@ -13,3 +13,8 @@ Feature: The official starter
     Given I am on the homepage
     And the page is hydrated
     Then I should see "Congratulations! Your app is running."
+
+  # The starter has no routes of its own: Angular's engine leaves any other address to its server, which answers 404.
+  Scenario: An address the starter does not know is answered with 404
+    Given I am on "/no-such-page"
+    Then the response status code should be 404
